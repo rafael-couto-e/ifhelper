@@ -8,6 +8,13 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+//Selecione a aba de todo e resolva todos eles inclusive esse
+//TODO transformar essa tela no idioma Inglês e Português
+//TODO adicionar um icone para cada Botão.
+//TODO adicionar métodos para todas as funções da atividade principal
+//TODO Adicionar remoto e submeter a atividade.(ver tutorial da aula).
+
+//Basic activity com floatButton removido
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -26,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     public void calculaFaltas(View v) {
         startActivity(new Intent(this, CalculaFaltasActivity.class));
     }
+
+    //TODO add Botão calculadora de notas.
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
