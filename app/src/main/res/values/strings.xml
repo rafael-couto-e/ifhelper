@@ -2,4 +2,8 @@
     <string name="app_name">ifhelper</string>
     <string name="action_settings">Opções</string>
     <string name="bem_vindo_ao_ifhelper">Bem Vindo ao IFHelper</string>
+    <string name="calcula_media_harmonica">Calcula Média Harmonica</string>
+    <string name="media">Média</string>
+
+    <!-- Strings related to login -->
 </resources>

@@ -1,6 +1,8 @@
 package ifrs.canoas.ifhelper;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -31,7 +33,16 @@ public class MainActivity extends AppCompatActivity {
      * @param v
      */
     public void calculaFaltas(View v) {
-        startActivity(new Intent(this, CalculaFaltasActivity.class));
+
+        Context contexto = getApplicationContext();
+        Intent objIntent = new Intent(contexto, CalculaFaltasActivity.class);
+
+        startActivity(objIntent);
+    }
+
+    public void calendarioAcademico(View v){
+        Intent objIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://google.com") );
+        startActivity(objIntent);
     }
 
     //TODO add Botão calculadora de notas.
