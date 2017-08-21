@@ -1,8 +1,30 @@
+# WEBSERVICES
+
 Projeto usado na disciplina Tópicos II - Desenvolvimento para dispositivos móveis.
 
-Cada Branch será uma aula 
+Os webservices permitem comunicarmos aplicações distintas desenvolvidas em linguagens distintas possibilitando ao usuário uma experiência rica e com diversos recursos.
 
-* Troca de atividades e manipulação de elementos (CalculadoraFaltas)
-* Consumo de web Services (webservices)
-* Banco de dados SQLite e ListActivity (SQLite)
-* Notificações (Notificações)
+
+
+## Entendendo WebServices
+
+Para testarmos recomendo o programa Postman ou o plugin do firefox httpRequester.
+
+Vamos consumir alguns webservices a partir da aula de hoje.
+
+login: https://moodle.canoas.ifrs.edu.br/login/token.php?username=USUARIO&password=SENHA&service=moodle_mobile_app
+
+Com o Token para fazer requisições:
+
+## Android
+
+Em android iremos precisar de uma tarefa assíncrona, com isso enquanto nosso aplicativo requisita coisas o mesmo não trava.
+
+E das seguintes permissões.
+
+```xml
+<uses-permission android:name="android.permission.INTERNET"/>
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+```
+
+Lembre-se da documentação oficial e da lib de terceiro para JSON.
