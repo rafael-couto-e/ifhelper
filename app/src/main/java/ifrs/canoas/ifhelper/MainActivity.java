@@ -68,4 +68,8 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void loginMoodle(View v){
+        startActivity(new Intent(this, Login.class));
+    }
 }

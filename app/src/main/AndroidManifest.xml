@@ -26,6 +26,23 @@
             </intent-filter>
         </activity>
         <activity android:name=".CalculaFaltasActivity" />
+        <activity
+            android:name=".Login"
+            android:label="@string/title_activity_login"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ifrs.canoas.ifhelper.MainActivity" />
+        </activity>
+        <activity
+            android:name=".LoginNativo"
+            android:label="@string/title_activity_login_nativo"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ifrs.canoas.ifhelper.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

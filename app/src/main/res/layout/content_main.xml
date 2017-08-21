@@ -38,11 +38,12 @@
             tools:ignore="RtlHardcoded" />
 
         <Button
+            android:id="@+id/btPortalDoAluno"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Portal do aluno"
-            android:id="@+id/btPortalDoAluno"
-            android:drawableLeft="@drawable/ic_school_red_24dp" />
+            android:drawableLeft="@drawable/ic_school_red_24dp"
+            android:onClick="loginMoodle"
+            android:text="Portal do aluno" />
 
         <Button
             android:layout_width="match_parent"
