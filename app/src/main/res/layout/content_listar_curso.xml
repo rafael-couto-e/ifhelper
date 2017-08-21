@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="ifrs.canoas.ifhelper.ListarCurso"
+    tools:showIn="@layout/activity_listar_curso">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="8dp">
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Meus cursos"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp" />
+
+        <ListView
+            android:id="@+id/CursosListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="36dp" />
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

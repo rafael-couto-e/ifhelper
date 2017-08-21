@@ -1,5 +1,6 @@
 package ifrs.canoas.ifhelper;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,12 +10,17 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import ifrs.canoas.model.portal.LoginRetorno;
 
 public class Login extends AppCompatActivity {
 
@@ -49,8 +55,6 @@ public class Login extends AppCompatActivity {
 
     private String downloadUrl(String myurl) throws IOException {
         InputStream is = null;
-        // Limitar a 500 Caracteres lidos
-        int len = 500;
         Log.d("DEBUG", "url: " + myurl);
 
         try {
@@ -68,7 +72,7 @@ public class Login extends AppCompatActivity {
             is = conn.getInputStream();
 
             // Convert the InputStream into a string
-            String contentAsString = readIt(is, len);
+            String contentAsString = readIt(is);
             return contentAsString;
 
             // Makes sure that the InputStream is closed after the app is
@@ -81,11 +85,16 @@ public class Login extends AppCompatActivity {
 
     }
 
-    public String readIt(InputStream stream, int len) throws IOException {
+    public String readIt(InputStream stream) throws IOException {
         Reader reader = null;
-        reader = new InputStreamReader(stream, "UTF-8");
-        char[] buffer = new char[len];
-        reader.read(buffer);
+        StringBuffer buffer = new StringBuffer();//Objeto de que vai armazenar o resultado
+        reader = new InputStreamReader(stream, "UTF-8"); //Objeto leitor
+        Reader in = new BufferedReader(reader); //Converte de input em buffer
+        int ch;
+        while ((ch = in.read()) > -1) {//Lendo Char por char
+            buffer.append((char) ch);
+        }
+        in.close();
         return new String(buffer);
     }
 
@@ -95,7 +104,8 @@ public class Login extends AppCompatActivity {
             try {
                 return downloadUrl(urls[0]);
             } catch (IOException e) {
-                return "Unable to retrieve web page. URL may be invalid." + e;
+                Log.e("Exception", e.toString());//Observe que aqui uso o log.e e não log.d
+                return "Problema ao montar a requisição";
             }
         }
 
@@ -103,9 +113,23 @@ public class Login extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             Log.d("teste", result);
-            //Gson g = new Gson();
-            //User user = g.fromJson(result.trim(), User.class);
+            Gson g = new Gson();
+            LoginRetorno retorno = g.fromJson(result.trim(), LoginRetorno.class);
+            Log.d("Teste", retorno.toString());
+            processaRetorno(retorno);
+        }
 
+
+    }
+
+    private void processaRetorno(LoginRetorno retorno) {
+        if (retorno.getToken() == "Nenhum") {
+            mensagem.setText(retorno.getError());
+        } else {
+            //Vamos criar um bundle para passar as info para outra tela e como alternativa seria usar variável estática.
+            Intent intent = new Intent(getApplicationContext(), ListarCurso.class);
+            intent.putExtra("token", retorno.getToken());
+            startActivity(intent);
         }
     }
 
