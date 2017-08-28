@@ -6,9 +6,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 //Selecione a aba de todo e resolva todos eles inclusive esse
 //TODO transformar essa tela no idioma Inglês e Português
@@ -70,6 +70,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loginMoodle(View v){
-        startActivity(new Intent(this, Login.class));
+        startActivity(new Intent(this, LoginActivity.class));
     }
 }
