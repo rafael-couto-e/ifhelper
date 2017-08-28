@@ -14,7 +14,9 @@ Vamos consumir alguns webservices a partir da aula de hoje.
 
 login: https://moodle.canoas.ifrs.edu.br/login/token.php?username=USUARIO&password=SENHA&service=moodle_mobile_app
 
-Com o Token para fazer requisições:
+Com o Token para fazer requisições podemos fazer mais requisições use os dois links para aprender a consumir os webservices do moodle:
+- https://docs.moodle.org/dev/Web_service_API_functions
+- API Documentada - http://www.refineddata.com/api/
 
 ## Android
 
