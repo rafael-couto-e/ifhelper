@@ -10,6 +10,7 @@ import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 
 /**
  * Created by marcio on 27/08/17.
@@ -22,6 +23,9 @@ public class WebServiceUtil {
         InputStream is = null;
         try {
             try {
+                String urlFinal = URLEncoder.encode(urlStr, "utf-8");// Bug de caracteres especiais na URL
+                //Créditos Cassiano
+                //Log.e("oi", urlFinal);
                 url = new URL(urlStr);
             } catch (MalformedURLException e) {
                 Log.e("SENHOR PROGRAMADOR", "Você fez caca verifique");

@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 import ifrs.canoas.lib.WebServiceUtil;
 import ifrs.canoas.model.portal.LoginRetorno;
@@ -33,19 +35,35 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    public void login(View v)
-    {
+    public void login(View v) {
         Log.d("Teste","testando botão");
         EditText usuario =  (EditText) findViewById(R.id.login);
         EditText senha =  (EditText) findViewById(R.id.senha);
 
         String uri = "http://moodle.canoas.ifrs.edu.br/login/token.php";
-        uri += "?username="+ usuario.getText().toString() +
-                "&password=" + senha.getText().toString()  +
-                "&service=moodle_mobile_app";
+
+        try {
+            uri += "?username=" + usuario.getText().toString() +
+                    "&password=" + URLEncoder.encode(senha.getText().toString(), "utf-8") +
+                    "&service=moodle_mobile_app";
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
         DownloadWebpageTask  tarefa = new DownloadWebpageTask();
         tarefa.execute(uri);
+    }
+
+    private void processaRetorno(LoginRetorno retorno) {
+        if (retorno.getToken() == "Nenhum") {
+            mensagem.setText(retorno.getError());
+        } else {
+            //Vamos criar um bundle para passar as info para outra tela e como alternativa seria usar variável estática.
+            Intent intent = new Intent(getApplicationContext(), ListarCursoActivity.class);
+            intent.putExtra("token", retorno.getToken());//Observar que o putExtra tem várias assinaturas
+            startActivity(intent);
+        }
     }
 
     private class DownloadWebpageTask extends AsyncTask<String, Void, String> {
@@ -67,17 +85,6 @@ public class LoginActivity extends AppCompatActivity {
             LoginRetorno retorno = g.fromJson(result.trim(), LoginRetorno.class);
             Log.d("Teste", retorno.toString());
             processaRetorno(retorno);
-        }
-    }
-
-    private void processaRetorno(LoginRetorno retorno) {
-        if (retorno.getToken() == "Nenhum") {
-            mensagem.setText(retorno.getError());
-        } else {
-            //Vamos criar um bundle para passar as info para outra tela e como alternativa seria usar variável estática.
-            Intent intent = new Intent(getApplicationContext(), ListarCursoActivity.class);
-            intent.putExtra("token", retorno.getToken());
-            startActivity(intent);
         }
     }
 

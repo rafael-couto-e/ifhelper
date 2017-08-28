@@ -9,9 +9,15 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import ifrs.canoas.lib.WebServiceUtil;
+import ifrs.canoas.model.portal.Curso;
 import ifrs.canoas.model.portal.User;
 
 public class ListarCursoActivity extends AppCompatActivity {
@@ -27,16 +33,22 @@ public class ListarCursoActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        recuperaDados();
+        recuperaDados();//Recuperando dados do putExtra
         trataFloatButton();
 
     }
 
+    /**
+     *
+     */
     private void recuperaDados() {
+        this.token = getIntent().getExtras().getString("token");
+
         Intent it = getIntent();
         if (it != null) {//Checar se veio por intent
             Bundle dados = it.getExtras();
             if (dados != null && dados.getString("token") != null) { //Checar se tem dados
+
                 this.token = dados.getString("token");
                 //Inicialmente preciso dos dados do user
                 loadUser();
@@ -50,13 +62,13 @@ public class ListarCursoActivity extends AppCompatActivity {
     private void populaListaCursos() {
 
         String url = "https://moodle.canoas.ifrs.edu.br/webservice/rest/server.php?" +
-                "wstoken=" + this.token + "&wsfunction=core_webservice_get_site_info&moodlewsrestformat=json";
-        new DadosDoUsuarioWebService().execute(url);
+                "wstoken=" + this.token + "&wsfunction=core_enrol_get_users_courses&moodlewsrestformat=json"
+                + "&userid=" + usuario.getUserid();
+        new ListCursosWebService().execute(url);
     }
 
     private void loadUser() {
-        //Observe que ainda é possível obter o token de forma estática
-        Log.d("INFo", User.token);
+
         String url = "https://moodle.canoas.ifrs.edu.br/webservice/rest/server.php?" +
                 "wstoken=" + this.token + "&wsfunction=core_webservice_get_site_info&moodlewsrestformat=json";
         new DadosDoUsuarioWebService().execute(url);
@@ -99,6 +111,12 @@ public class ListarCursoActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             Log.d("teste", result);
+
+            Gson parser = new Gson();
+            List<Curso> listaCursos = new ArrayList<>();
+            listaCursos = parser.fromJson(result, new TypeToken<List<Curso>>() {
+            }.getType());
+            Log.d("Ver usuario", listaCursos.get(0).toString());
         }
 
 
@@ -115,12 +133,17 @@ public class ListarCursoActivity extends AppCompatActivity {
             }
         }
 
+
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
-
             Log.d("teste", result);
             //Com o usuario posso pedir a lista dos seus cursos
+            Gson g = new Gson();
+            usuario = g.fromJson(result, User.class);
+            Log.d("Ver usuario", usuario.toString());
+            populaListaCursos();
+            //Observe que chamo aqui o populaListaCurso somente assim tenho certeza que o
         }
 
 
