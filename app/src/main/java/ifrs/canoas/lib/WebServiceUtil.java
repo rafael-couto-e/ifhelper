@@ -48,6 +48,13 @@ public class WebServiceUtil {
 
     }
 
+    /**
+     * Método ReadIt genérico permite ler um número ilimitado de caracteres.
+     *
+     * @param stream
+     * @return String
+     * @throws IOException
+     */
     private static String readIt(InputStream stream) throws IOException {
         Reader reader = null;
         StringBuffer buffer = new StringBuffer();//Objeto de que vai armazenar o resultado

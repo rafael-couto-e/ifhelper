@@ -17,6 +17,7 @@ import ifrs.canoas.model.portal.User;
 public class ListarCursoActivity extends AppCompatActivity {
 
     private String token;
+    private User usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +28,6 @@ public class ListarCursoActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         recuperaDados();
-        populaListaCursos();
         trataFloatButton();
 
     }
@@ -38,6 +38,8 @@ public class ListarCursoActivity extends AppCompatActivity {
             Bundle dados = it.getExtras();
             if (dados != null && dados.getString("token") != null) { //Checar se tem dados
                 this.token = dados.getString("token");
+                //Inicialmente preciso dos dados do user
+                loadUser();
                 return ;
             }
         }
@@ -46,7 +48,10 @@ public class ListarCursoActivity extends AppCompatActivity {
     }
 
     private void populaListaCursos() {
-        //Inicialmente preciso dos dados do user
+
+        String url = "https://moodle.canoas.ifrs.edu.br/webservice/rest/server.php?" +
+                "wstoken=" + this.token + "&wsfunction=core_webservice_get_site_info&moodlewsrestformat=json";
+        new DadosDoUsuarioWebService().execute(url);
     }
 
     private void loadUser() {
@@ -54,6 +59,8 @@ public class ListarCursoActivity extends AppCompatActivity {
         Log.d("INFo", User.token);
         String url = "https://moodle.canoas.ifrs.edu.br/webservice/rest/server.php?" +
                 "wstoken=" + this.token + "&wsfunction=core_webservice_get_site_info&moodlewsrestformat=json";
+        new DadosDoUsuarioWebService().execute(url);
+
     }
 
     /**
@@ -92,6 +99,28 @@ public class ListarCursoActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             Log.d("teste", result);
+        }
+
+
+    }
+
+    private class DadosDoUsuarioWebService extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+            try {
+                return WebServiceUtil.getContentAsString(urls[0]);
+            } catch (IOException e) {
+                Log.e("Exception", e.toString());//Observe que aqui uso o log.e e não log.d
+                return "Problema ao montar a requisição";
+            }
+        }
+
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(String result) {
+
+            Log.d("teste", result);
+            //Com o usuario posso pedir a lista dos seus cursos
         }
 
 
