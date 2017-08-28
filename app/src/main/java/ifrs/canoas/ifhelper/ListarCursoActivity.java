@@ -38,6 +38,7 @@ public class ListarCursoActivity extends AppCompatActivity {
             Bundle dados = it.getExtras();
             if (dados != null && dados.getString("token") != null) { //Checar se tem dados
                 this.token = dados.getString("token");
+                return ;
             }
         }
         //TODO o correto é tratar essas possíveis exceções um exemplo pode ser abrir o LoginActivity novamente
