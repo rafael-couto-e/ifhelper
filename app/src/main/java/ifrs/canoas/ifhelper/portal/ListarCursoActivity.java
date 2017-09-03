@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -70,13 +71,17 @@ public class ListarCursoActivity extends DefaultActivity {
         list = (ListView) findViewById(R.id.CursosListView);
         CursoAdapter ad = new CursoAdapter(getApplicationContext(), lista);
         list.setAdapter(ad);
+
+        //Sempre que for trabalhar com  Adapters você poderá ter esse problema
+        //https://pt.stackoverflow.com/questions/48435/meu-listview-esta-sem-clique
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
-                Log.i("Hello!", "Y u no see me?" + position + " " + id);
+                Log.i("DADOS", "Para que servem?" + position + " " + id);
+                Toast.makeText(getApplicationContext(), "aaaa", Toast.LENGTH_SHORT).show();
 
             }
 

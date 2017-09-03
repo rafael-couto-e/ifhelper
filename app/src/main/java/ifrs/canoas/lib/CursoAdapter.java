@@ -54,24 +54,29 @@ public class CursoAdapter extends BaseAdapter {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.curso_elemento, null);
 
-        final TextView titulo = (TextView) layout.findViewById(R.id.nomeCurso);
-        TextView descricao = (TextView) layout.findViewById(R.id.descricaoCurso);
+        TextView titulo = (TextView) layout.findViewById(R.id.nomeCurso);
+        final TextView descricao = (TextView) layout.findViewById(R.id.descricaoCurso);
 
         final Curso curso = (Curso) this.getItem(position);
         titulo.setText(curso.getShortname());
-        descricao.setText(curso.getSummary().substring(0, 100));
+        String desc = curso.getSummary().replaceAll("\\<.*?>", "");
+        int tam = desc.length() > 100 ? 100 : desc.length();
+        final String finalDesc = desc.substring(0, tam);
+        descricao.setText(finalDesc);
 
         Button bt = (Button) layout.findViewById(R.id.courseCompleteDescriptionBT);
+        bt.setFocusable(false);
+        bt.setFocusableInTouchMode(false);
         bt.setOnClickListener(new View.OnClickListener() {
             private boolean toogle = true;
 
             @Override
             public void onClick(View view) {
                 if (toogle) {
-                    titulo.setText(curso.getSummary());
+                    descricao.setText(curso.getSummary().replaceAll("\\<.*?>", ""));
                     toogle = false;
                 } else {
-                    curso.getSummary().substring(0, 100);
+                    descricao.setText(finalDesc);
                     toogle = true;
                 }
             }
