@@ -25,9 +25,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CalculaFaltasActivity" />
+        <activity android:name=".geral.CalculaFaltasActivity" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".geral.LoginActivity"
             android:label="@string/title_activity_login"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -44,7 +44,7 @@
                 android:value="ifrs.canoas.ifhelper.MainActivity" />
         </activity>
         <activity
-            android:name=".ListarCursoActivity"
+            android:name=".portal.ListarCursoActivity"
             android:label="@string/title_activity_listar_curso"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">

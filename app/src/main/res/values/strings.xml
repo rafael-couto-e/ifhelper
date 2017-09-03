@@ -20,6 +20,7 @@
         completions."
     </string>
     <string name="title_activity_listar_curso">ListarCurso</string>
+    <string name="meus_cursos">Meus cursos</string>
 
     <!-- Strings related to login -->
 </resources>

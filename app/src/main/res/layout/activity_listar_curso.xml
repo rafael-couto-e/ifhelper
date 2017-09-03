@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ifrs.canoas.ifhelper.ListarCursoActivity">
+    tools:context="ifrs.canoas.ifhelper.portal.ListarCursoActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
 
     <include
         layout="@layout/content_listar_curso"
-        android:layout_height="449dp" />
+        android:layout_height="match_parent" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

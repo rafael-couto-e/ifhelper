@@ -13,21 +13,20 @@
     tools:showIn="@layout/activity_main">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:ignore="UselessParent">
 
         <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/bem_vindo_ao_ifhelper"
-            android:id="@+id/textView"
             android:textColor="@color/material_deep_teal_500" />
 
         <Button
             android:id="@+id/btCalculaFoto"
-            style="?android:attr/buttonStyleSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="51dp"
@@ -46,10 +45,10 @@
             android:text="Portal do aluno" />
 
         <Button
+            android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Calendário Acadêmico"
-            android:id="@+id/button" />
+            android:text="Calendário Acadêmico" />
     </LinearLayout>
 
 </RelativeLayout>

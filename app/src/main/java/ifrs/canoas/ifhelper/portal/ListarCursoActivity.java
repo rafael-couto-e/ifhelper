@@ -1,29 +1,34 @@
-package ifrs.canoas.ifhelper;
+package ifrs.canoas.ifhelper.portal;
 
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
+import ifrs.canoas.ifhelper.DefaultActivity;
+import ifrs.canoas.ifhelper.R;
+import ifrs.canoas.ifhelper.geral.LoginActivity;
+import ifrs.canoas.lib.CursoAdapter;
 import ifrs.canoas.lib.WebServiceUtil;
 import ifrs.canoas.model.portal.Curso;
 import ifrs.canoas.model.portal.User;
 
-public class ListarCursoActivity extends AppCompatActivity {
+public class ListarCursoActivity extends DefaultActivity {
 
     private String token;
     private User usuario;
+    private ListView list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +40,10 @@ public class ListarCursoActivity extends AppCompatActivity {
 
         recuperaDados();//Recuperando dados do putExtra
         trataFloatButton();
+        setToolbar();
 
     }
+
 
     /**
      *
@@ -57,6 +64,23 @@ public class ListarCursoActivity extends AppCompatActivity {
         }
         //TODO o correto é tratar essas possíveis exceções um exemplo pode ser abrir o LoginActivity novamente
         startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+    }
+
+    private void geraLista(List<Curso> lista) {
+        list = (ListView) findViewById(R.id.CursosListView);
+        CursoAdapter ad = new CursoAdapter(getApplicationContext(), lista);
+        list.setAdapter(ad);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+
+                Log.i("Hello!", "Y u no see me?" + position + " " + id);
+
+            }
+
+        });
     }
 
     private void populaListaCursos() {
@@ -110,13 +134,12 @@ public class ListarCursoActivity extends AppCompatActivity {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
-            Log.d("teste", result);
-
             Gson parser = new Gson();
-            List<Curso> listaCursos = new ArrayList<>();
+            List<Curso> listaCursos;
             listaCursos = parser.fromJson(result, new TypeToken<List<Curso>>() {
             }.getType());
-            Log.d("Ver usuario", listaCursos.get(0).toString());
+            geraLista(listaCursos);
+            Log.d("Curso", listaCursos.get(0).toString());
         }
 
 
@@ -137,13 +160,12 @@ public class ListarCursoActivity extends AppCompatActivity {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
-            Log.d("teste", result);
             //Com o usuario posso pedir a lista dos seus cursos
             Gson g = new Gson();
             usuario = g.fromJson(result, User.class);
-            Log.d("Ver usuario", usuario.toString());
             populaListaCursos();
-            //Observe que chamo aqui o populaListaCurso somente assim tenho certeza que o
+            //Observe que chamo aqui o populaListaCurso somente assim tenho certeza que os dados estão disponíveis.
+            // Lembre-se assincrono é um processo pararelo e não sequencial como algoritmos.
         }
 
 

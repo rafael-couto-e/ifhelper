@@ -1,4 +1,4 @@
-package ifrs.canoas.ifhelper;
+package ifrs.canoas.ifhelper.geral;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
+import ifrs.canoas.ifhelper.R;
+import ifrs.canoas.ifhelper.portal.ListarCursoActivity;
 import ifrs.canoas.lib.WebServiceUtil;
 import ifrs.canoas.model.portal.LoginRetorno;
 

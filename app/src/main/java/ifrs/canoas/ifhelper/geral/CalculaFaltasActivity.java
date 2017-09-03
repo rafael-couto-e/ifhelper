@@ -1,12 +1,13 @@
-package ifrs.canoas.ifhelper;
+package ifrs.canoas.ifhelper.geral;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import ifrs.canoas.ifhelper.R;
 import ifrs.canoas.model.FaltaCalculator;
 
 public class CalculaFaltasActivity extends AppCompatActivity {
@@ -15,6 +16,7 @@ public class CalculaFaltasActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calcula_faltas);
+
     }
 
     public void calcula(View v) {

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="ifrs.canoas.ifhelper.LoginActivity"
+    tools:context="ifrs.canoas.ifhelper.geral.LoginActivity"
     tools:showIn="@layout/activity_login">
 
     <LinearLayout
@@ -31,7 +31,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Name"
+            android:text="marcio.bigolin"
             tools:layout_editor_absoluteX="55dp"
             tools:layout_editor_absoluteY="98dp" />
 
