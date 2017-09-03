@@ -1,6 +1,10 @@
-# Adapter
+# WEBSERVICES
 
-Bom para que diabos serve um adapter ![alt text](https://www.google.com.br/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwjOoqvkjorWAhUowlQKHc4zADoQjRwIBw&url=https%3A%2F%2Fwww.amazon.com%2FCkitze-Flat-Europe-Asia-Adapter%2Fdp%2FB002TZBW74&psig=AFQjCNFAJU3jDJT2pu7Q3Sa-6R4gZVXslA&ust=1504565854054738)
+Projeto usado na disciplina Tópicos II - Desenvolvimento para dispositivos móveis.
+
+Os webservices permitem comunicarmos aplicações distintas desenvolvidas em linguagens distintas possibilitando ao usuário uma experiência rica e com diversos recursos.
+
+
 
 ## Entendendo WebServices
 
@@ -10,10 +14,12 @@ Vamos consumir alguns webservices a partir da aula de hoje.
 
 login: https://moodle.canoas.ifrs.edu.br/login/token.php?username=USUARIO&password=SENHA&service=moodle_mobile_app
 
-
 Com o Token para fazer requisições podemos fazer mais requisições use os dois links para aprender a consumir os webservices do moodle:
 - https://docs.moodle.org/dev/Web_service_API_functions
 - API Documentada - http://www.refineddata.com/api/
+- API Documentada pelo Bigolin - 
+
+Você vai precisar das [ async_task.md | async Tasks ]
 
 ## Android
 
