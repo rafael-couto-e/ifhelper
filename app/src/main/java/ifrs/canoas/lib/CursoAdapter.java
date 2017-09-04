@@ -17,7 +17,7 @@ import ifrs.canoas.model.portal.Curso;
 /**
  * Classe Adapter personalizada o android fornece alguns adapters mas que graça tem
  */
-public class CursoAdapter extends BaseAdapter {
+public class CursoAdapter extends BaseAdapter  {
 
     private Context context;//Contexto da aplicação preciso para poder usar os recursos do android
     private List<Curso> list; //Minha Lista
@@ -38,6 +38,7 @@ public class CursoAdapter extends BaseAdapter {
         return list.size();
     }
 
+
     @Override
     public Object getItem(int arg0) {
         return list.get(arg0);
@@ -49,9 +50,10 @@ public class CursoAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View arg1, ViewGroup arg2) {
+    public View getView(int position, View elemento, ViewGroup pai) {
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
         LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.curso_elemento, null);
 
         TextView titulo = (TextView) layout.findViewById(R.id.nomeCurso);
@@ -59,27 +61,31 @@ public class CursoAdapter extends BaseAdapter {
 
         final Curso curso = (Curso) this.getItem(position);
         titulo.setText(curso.getShortname());
+
         String desc = curso.getSummary().replaceAll("\\<.*?>", "");
+
         int tam = desc.length() > 100 ? 100 : desc.length();
-        final String finalDesc = desc.substring(0, tam);
+
+        final String finalDesc = desc.substring(0, tam) + "...";
+
         descricao.setText(finalDesc);
 
         Button bt = (Button) layout.findViewById(R.id.courseCompleteDescriptionBT);
-        bt.setFocusable(false);
-        bt.setFocusableInTouchMode(false);
-        bt.setOnClickListener(new View.OnClickListener() {
-            private boolean toogle = true;
 
-            @Override
-            public void onClick(View view) {
-                if (toogle) {
-                    descricao.setText(curso.getSummary().replaceAll("\\<.*?>", ""));
-                    toogle = false;
-                } else {
-                    descricao.setText(finalDesc);
-                    toogle = true;
-                }
-            }
+        bt.setOnClickListener(
+                new View.OnClickListener() {
+                    private boolean toogle = true;
+
+                    @Override
+                    public void onClick(View view) {
+                        if (toogle) {
+                            descricao.setText(curso.getSummary().replaceAll("\\<.*?>", ""));
+                            toogle = false;
+                        } else {
+                            descricao.setText(finalDesc);
+                            toogle = true;
+                        }
+                    }
         });
 
         return layout;

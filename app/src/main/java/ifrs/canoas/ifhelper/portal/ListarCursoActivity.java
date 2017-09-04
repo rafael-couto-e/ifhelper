@@ -21,6 +21,7 @@ import ifrs.canoas.ifhelper.DefaultActivity;
 import ifrs.canoas.ifhelper.R;
 import ifrs.canoas.ifhelper.geral.LoginActivity;
 import ifrs.canoas.lib.CursoAdapter;
+import ifrs.canoas.lib.InterpretadorToken;
 import ifrs.canoas.lib.WebServiceUtil;
 import ifrs.canoas.model.portal.Curso;
 import ifrs.canoas.model.portal.User;
@@ -34,6 +35,7 @@ public class ListarCursoActivity extends DefaultActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_listar_curso);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -69,7 +71,9 @@ public class ListarCursoActivity extends DefaultActivity {
 
     private void geraLista(List<Curso> lista) {
         list = (ListView) findViewById(R.id.CursosListView);
+
         CursoAdapter ad = new CursoAdapter(getApplicationContext(), lista);
+
         list.setAdapter(ad);
 
         //Sempre que for trabalhar com  Adapters você poderá ter esse problema
@@ -141,10 +145,11 @@ public class ListarCursoActivity extends DefaultActivity {
         protected void onPostExecute(String result) {
             Gson parser = new Gson();
             List<Curso> listaCursos;
-            listaCursos = parser.fromJson(result, new TypeToken<List<Curso>>() {
-            }.getType());
+
+            listaCursos = parser.fromJson(result,
+                    new TypeToken<List<Curso>>(){}.getType());
             geraLista(listaCursos);
-            Log.d("Curso", listaCursos.get(0).toString());
+
         }
 
 
