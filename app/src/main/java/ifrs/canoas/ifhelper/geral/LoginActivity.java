@@ -1,6 +1,7 @@
 package ifrs.canoas.ifhelper.geral;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import java.net.URLEncoder;
 
 import ifrs.canoas.ifhelper.R;
 import ifrs.canoas.ifhelper.portal.ListarCursoActivity;
+import ifrs.canoas.lib.SharedPreferenceHelper;
 import ifrs.canoas.lib.WebServiceUtil;
 import ifrs.canoas.model.portal.LoginRetorno;
 
@@ -61,9 +63,16 @@ public class LoginActivity extends AppCompatActivity {
         if (retorno.getToken() == "Nenhum") {
             mensagem.setText(retorno.getError());
         } else {
+
+            String token = retorno.getToken();
+
+            SharedPreferenceHelper sp = new SharedPreferenceHelper(this);
+            sp.save("TOKEN", token);
+
             //Vamos criar um bundle para passar as info para outra tela e como alternativa seria usar variável estática.
             Intent intent = new Intent(getApplicationContext(), ListarCursoActivity.class);
-            intent.putExtra("token", retorno.getToken());//Observar que o putExtra tem várias assinaturas
+            intent.putExtra("token", token);//Observar que o putExtra tem várias assinaturas
+
             startActivity(intent);
         }
     }

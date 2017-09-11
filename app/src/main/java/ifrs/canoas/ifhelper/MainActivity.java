@@ -9,6 +9,7 @@ import android.view.View;
 import ifrs.canoas.ifhelper.geral.CalculaFaltasActivity;
 import ifrs.canoas.ifhelper.geral.LoginActivity;
 import ifrs.canoas.ifhelper.portal.ListarCursoActivity;
+import ifrs.canoas.lib.CONST;
 import ifrs.canoas.lib.SharedPreferenceHelper;
 
 //Selecione a aba de todo e resolva todos eles inclusive esse
@@ -54,7 +55,7 @@ public class MainActivity extends DefaultActivity {
      * @param v
      */
     public void loginMoodle(View v){
-        SharedPreferenceHelper sph = new SharedPreferenceHelper(this, "CONFS");
+        SharedPreferenceHelper sph = new SharedPreferenceHelper(this, CONST.CONF_FILE);
         String token = sph.readString("TOKEN", "SEM_TOKEN");
         if (token.equals("SEM_TOKEN")) {
             startActivity(new Intent(this, LoginActivity.class));

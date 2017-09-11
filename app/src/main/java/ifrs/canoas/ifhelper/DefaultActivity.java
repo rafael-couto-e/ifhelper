@@ -1,9 +1,12 @@
 package ifrs.canoas.ifhelper;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import ifrs.canoas.ifhelper.portal.ListarMensagemActivity;
 
 public abstract class DefaultActivity extends AppCompatActivity {
 
@@ -27,12 +30,15 @@ public abstract class DefaultActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }else if(id == R.id.mensagensMenu){
+            return getMensagens();
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    private void getMensagens() {
-
+    private boolean getMensagens() {
+        startActivity(new Intent(getApplicationContext(), ListarMensagemActivity.class));
+        return true;
     }
 }

@@ -2,12 +2,11 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '25.0.0'
-
+    buildToolsVersion '26.0.1'
     defaultConfig {
         applicationId "ifrs.canoas.ifhelper"
         minSdkVersion 10
-        targetSdkVersion 24
+        targetSdkVersion 16
         versionCode 1
         versionName "1.0"
     }
@@ -16,8 +15,13 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+            debuggable true
+        }
     }
     compileOptions {
+    }
+    productFlavors {
     }
 }
 

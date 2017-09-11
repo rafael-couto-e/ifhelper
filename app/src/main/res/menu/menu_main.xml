@@ -17,5 +17,13 @@
         android:icon="@drawable/ic_language_24dp"
         android:orderInCategory="101"
         android:title="Trocar Idioma" />
+    <item
+        android:id="@+id/mensagensMenu"
+        android:enabled="true"
+        android:icon="@drawable/ic_message_black_24dp"
+        android:orderInCategory="102"
+        android:title="Mensagens"
+        android:visible="true"
+        app:showAsAction="always" />
 
 </menu>

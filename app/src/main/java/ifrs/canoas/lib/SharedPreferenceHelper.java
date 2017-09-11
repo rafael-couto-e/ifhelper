@@ -22,6 +22,14 @@ public class SharedPreferenceHelper {
         this.file = name;
     }
 
+    public SharedPreferenceHelper(Context t) {
+        this.context = t;
+        //Observe que o 0 é o modo do SharedPreferences que hoje só é aceito o Context.MODE_PRIVATE
+        this.sp = t.getSharedPreferences(CONST.CONF_FILE, 0);
+        this.file = CONST.CONF_FILE;
+    }
+
+
     public void save(String chave, String valor) {
 
         SharedPreferences.Editor editor = sp.edit();
@@ -47,5 +55,9 @@ public class SharedPreferenceHelper {
 
     public String readString(String chave, String defaultValue) {
         return sp.getString(chave, defaultValue);
+    }
+
+    public int readInt(String chave, int i) {
+        return sp.getInt(chave, i);
     }
 }
