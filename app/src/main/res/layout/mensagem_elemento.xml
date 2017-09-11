@@ -33,7 +33,7 @@
             android:layout_width="31dp"
             android:layout_height="30dp"
             android:layout_gravity="right"
-            android:drawableLeft="@drawable/ic_unfold_more_24dp"
+            android:drawableLeft="@drawable/ic_message_black_24dp"
             android:focusable="false"
             android:focusableInTouchMode="false" />
     </LinearLayout>

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,12 +17,10 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import ifrs.canoas.ifhelper.DefaultActivity;
 import ifrs.canoas.ifhelper.R;
 import ifrs.canoas.ifhelper.geral.LoginActivity;
-import ifrs.canoas.lib.CONST;
 import ifrs.canoas.lib.MensagemAdapter;
 import ifrs.canoas.lib.SharedPreferenceHelper;
 import ifrs.canoas.lib.WebServiceUtil;
@@ -32,7 +29,6 @@ import ifrs.canoas.model.portal.User;
 
 public class ListarMensagemActivity extends DefaultActivity {
 
-    private String token;
     private User usuario;
     private ListView list;
 
@@ -44,7 +40,6 @@ public class ListarMensagemActivity extends DefaultActivity {
         recuperaDados();
         trataFloatButton();
         setToolbar();
-
     }
 
 
@@ -66,7 +61,7 @@ public class ListarMensagemActivity extends DefaultActivity {
                     this.usuario.setToken(token);
                     populaListaMensagens();
                 }else{
-                    loadUser();
+                    loadUser(token);
                 }
             }
         } catch (Exception e){
@@ -93,15 +88,15 @@ public class ListarMensagemActivity extends DefaultActivity {
 
     private void populaListaMensagens() {
         String url = "https://moodle.canoas.ifrs.edu.br/webservice/rest/server.php?" +
-                "wstoken=" + this.token + "&wsfunction=core_message_get_messages&moodlewsrestformat=json&read=1"
+                "wstoken=" + this.usuario.getToken() + "&wsfunction=core_message_get_messages&moodlewsrestformat=json&read=1"
                 + "&useridto=" + usuario.getUserid() +"&type=conversations";
         new ListMensagemWebService().execute(url);
     }
 
-    private void loadUser() {
+    private void loadUser(String token) {
 
         String url = "https://moodle.canoas.ifrs.edu.br/webservice/rest/server.php?" +
-                "wstoken=" + this.token + "&wsfunction=core_webservice_get_site_info&moodlewsrestformat=json";
+                "wstoken=" + token + "&wsfunction=core_webservice_get_site_info&moodlewsrestformat=json";
         new DadosDoUsuarioWebService().execute(url);
 
     }
