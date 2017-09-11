@@ -31,4 +31,8 @@ public abstract class DefaultActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private void getMensagens() {
+
+    }
 }

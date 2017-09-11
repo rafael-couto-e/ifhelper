@@ -1,27 +1,51 @@
 package ifrs.canoas.lib;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 /**
- * Created by marcio on 03/09/17.
+ * TODO Complete a classe com os métodos para ler e salvar dados de Booleanos e doubles e ler inteiros
  */
-
 public class SharedPreferenceHelper {
     private Context context;
+    private SharedPreferences sp;
+    private String file;
 
-    public SharedPreferenceHelper(Context t) {
-        context = t;
+    /**
+     * @param Context t
+     * @param String  name - Nome do arquivo de SharedPreferences
+     */
+    public SharedPreferenceHelper(Context t, String name) {
+        this.context = t;
+        //Observe que o 0 é o modo do SharedPreferences que hoje só é aceito o Context.MODE_PRIVATE
+        this.sp = t.getSharedPreferences(name, 0);
+        this.file = name;
     }
 
     public void save(String chave, String valor) {
 
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString(chave, valor);
+
+        // Commit the edits!
+        editor.commit();
+
     }
 
     public void save(String chave, int valor) {
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putInt(chave, valor);
 
+        // Commit the edits!
+        editor.commit();
     }
 
-    public int readInt(String chave) {
-        return 0;
+
+    public String readString(String chave) {
+        return sp.getString(chave, "DEFAULT_VALUE");
+    }
+
+    public String readString(String chave, String defaultValue) {
+        return sp.getString(chave, defaultValue);
     }
 }

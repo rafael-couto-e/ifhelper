@@ -8,6 +8,8 @@ import android.view.View;
 
 import ifrs.canoas.ifhelper.geral.CalculaFaltasActivity;
 import ifrs.canoas.ifhelper.geral.LoginActivity;
+import ifrs.canoas.ifhelper.portal.ListarCursoActivity;
+import ifrs.canoas.lib.SharedPreferenceHelper;
 
 //Selecione a aba de todo e resolva todos eles inclusive esse
 //TODO transformar essa tela no idioma Inglês e Português (caso não tenha feito) 0,5
@@ -47,11 +49,21 @@ public class MainActivity extends DefaultActivity {
 
 
     /**
-     * Chamada para atividade que realiza o login no MOODLE.
+     * Com putEXTRA
      *
      * @param v
      */
     public void loginMoodle(View v){
-        startActivity(new Intent(this, LoginActivity.class));
+        SharedPreferenceHelper sph = new SharedPreferenceHelper(this, "CONFS");
+        String token = sph.readString("TOKEN", "SEM_TOKEN");
+        if (token.equals("SEM_TOKEN")) {
+            startActivity(new Intent(this, LoginActivity.class));
+        } else {
+            Intent intent = new Intent(getApplicationContext(), ListarCursoActivity.class);
+            intent.putExtra("token", token);
+            startActivity(intent);
+        }
     }
+
+
 }
