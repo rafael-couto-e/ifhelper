@@ -61,6 +61,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ifrs.canoas.ifhelper.MainActivity" />
         </activity>
+        <activity
+            android:name=".portal.AnotacoesActivity"
+            android:label="@string/title_activity_anotacoes"
+            android:parentActivityName=".portal.ListarCursoActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ifrs.canoas.ifhelper.portal.ListarCursoActivity" />
+        </activity>
     </application>
 
 </manifest>
