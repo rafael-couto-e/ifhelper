@@ -1,4 +1,4 @@
-package ifrs.canoas.lib;
+package ifrs.canoas.ifhelper.portal;
 
 import android.content.Context;
 import android.view.LayoutInflater;

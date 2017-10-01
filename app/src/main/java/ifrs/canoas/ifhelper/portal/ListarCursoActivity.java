@@ -20,7 +20,6 @@ import java.util.List;
 import ifrs.canoas.ifhelper.DefaultActivity;
 import ifrs.canoas.ifhelper.R;
 import ifrs.canoas.ifhelper.geral.LoginActivity;
-import ifrs.canoas.lib.CursoAdapter;
 import ifrs.canoas.lib.WebServiceUtil;
 import ifrs.canoas.model.portal.Curso;
 import ifrs.canoas.model.portal.User;

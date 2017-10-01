@@ -70,6 +70,24 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ifrs.canoas.ifhelper.portal.ListarCursoActivity" />
         </activity>
+        <activity
+            android:name=".notes.ListarNotesActivity"
+            android:label="@string/title_activity_listar_notes"
+            android:parentActivityName=".portal.ListarCursoActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ifrs.canoas.ifhelper.portal.ListarCursoActivity" />
+        </activity>
+        <activity
+            android:name=".portal.VerCursoActivity"
+            android:label="@string/title_activity_ver_curso"
+            android:parentActivityName=".portal.ListarCursoActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ifrs.canoas.ifhelper.portal.ListarCursoActivity" />
+        </activity>
     </application>
 
 </manifest>

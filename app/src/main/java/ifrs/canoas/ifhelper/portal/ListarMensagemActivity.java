@@ -21,7 +21,6 @@ import java.util.List;
 import ifrs.canoas.ifhelper.DefaultActivity;
 import ifrs.canoas.ifhelper.R;
 import ifrs.canoas.ifhelper.geral.LoginActivity;
-import ifrs.canoas.lib.MensagemAdapter;
 import ifrs.canoas.lib.SharedPreferenceHelper;
 import ifrs.canoas.lib.WebServiceUtil;
 import ifrs.canoas.model.portal.Mensagem;
