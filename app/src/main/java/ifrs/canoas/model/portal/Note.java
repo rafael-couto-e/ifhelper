@@ -17,7 +17,7 @@ import ifrs.canoas.lib.BancoHelper;
 public class Note {
     private int idNota;
     private String titulo;
-    private String data;
+    private long data;
     private String texto;
     private String disciplina;
 
@@ -46,11 +46,11 @@ public class Note {
         this.titulo = titulo;
     }
 
-    public String getData() {
+    public long getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(long data) {
         this.data = data;
     }
 
@@ -152,7 +152,7 @@ public class Note {
 
         c.moveToFirst();
         this.idNota = c.getInt(c.getColumnIndex(NoteContract.NoteEntry._ID));
-        this.data = c.getString(c.getColumnIndex(NoteContract.NoteEntry.COLUMN_NAME_DATA));
+        this.data = c.getLong(c.getColumnIndex(NoteContract.NoteEntry.COLUMN_NAME_DATA));
         this.disciplina = c.getString(c.getColumnIndex(NoteContract.NoteEntry.COLUMN_NAME_DISCIPLINA));
         this.texto = c.getString(c.getColumnIndex(NoteContract.NoteEntry.COLUMN_NAME_TEXTO));
 
@@ -190,7 +190,7 @@ public class Note {
             do {
                 Note nt = new Note();
                 nt.setIdNota(c.getInt(c.getColumnIndex(NoteContract.NoteEntry._ID)));
-                nt.setData(c.getString(c.getColumnIndex(NoteContract.NoteEntry.COLUMN_NAME_DATA)));
+                nt.setData(c.getLong(c.getColumnIndex(NoteContract.NoteEntry.COLUMN_NAME_DATA)));
                 nt.setDisciplina(c.getString(c.getColumnIndex(NoteContract.NoteEntry.COLUMN_NAME_DISCIPLINA)));
                 nt.setTexto(c.getString(c.getColumnIndex(NoteContract.NoteEntry.COLUMN_NAME_TEXTO)));
                 nt.setTitulo(c.getString(c.getColumnIndex(NoteContract.NoteEntry.COLUMN_NAME_TITULO)));
@@ -227,10 +227,10 @@ public class Note {
          public static final String SQL_CREATE_ENTRIES =
                 "CREATE TABLE " + NoteEntry.TABLE_NAME + " (" +
                         NoteEntry._ID + " INTEGER PRIMARY KEY," +
-                        NoteEntry.COLUMN_NAME_TEXTO + "TEXT, " +
-                        NoteEntry.COLUMN_NAME_DATA + "INTEGER, " +
-                        NoteEntry.COLUMN_NAME_DISCIPLINA + "TEXT, "  +
-                        NoteEntry.COLUMN_NAME_TITULO + "TEXT )";
+                        NoteEntry.COLUMN_NAME_TEXTO + " TEXT, " +
+                        NoteEntry.COLUMN_NAME_DATA + " INTEGER, " +
+                        NoteEntry.COLUMN_NAME_DISCIPLINA + " TEXT, "  +
+                        NoteEntry.COLUMN_NAME_TITULO + " TEXT )";
 
         public static final String SQL_DELETE_ENTRIES =
                 "DROP TABLE IF EXISTS " + NoteEntry.TABLE_NAME;

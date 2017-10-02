@@ -10,6 +10,7 @@ import android.view.View;
 
 import ifrs.canoas.ifhelper.DefaultActivity;
 import ifrs.canoas.ifhelper.R;
+import ifrs.canoas.ifhelper.notes.ListarNotesActivity;
 
 public class VerCursoActivity extends DefaultActivity {
     private int idCurso = 1;
@@ -19,6 +20,13 @@ public class VerCursoActivity extends DefaultActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_curso);
         setToolbar();
+
+        recuperaPutExtra();
+        configuraFloatButton();
+    }
+
+    private void recuperaPutExtra(){
+        //TODO pegar o id do curso que vem do campo anterior
     }
 
     private void configuraFloatButton(){
@@ -26,7 +34,7 @@ public class VerCursoActivity extends DefaultActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ListarCursoActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ListarNotesActivity.class);
                 intent.putExtra("idCurso", idCurso);
                 startActivity(intent);
             }

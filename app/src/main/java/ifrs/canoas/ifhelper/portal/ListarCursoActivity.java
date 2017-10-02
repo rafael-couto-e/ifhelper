@@ -83,8 +83,9 @@ public class ListarCursoActivity extends DefaultActivity {
                                     int position, long id) {
 
                 Log.i("DADOS", "Para que servem?" + position + " " + id);
-                Toast.makeText(getApplicationContext(), "aaaa", Toast.LENGTH_SHORT).show();
-
+                Intent intent = new Intent(getApplicationContext(), VerCursoActivity.class);
+                intent.putExtra("idCurso", id);//Observe que esse é o id lá do webservice
+                startActivity(intent);
             }
 
         });

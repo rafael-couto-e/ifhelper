@@ -16,12 +16,12 @@
         android:weightSum="1">
 
 
-
         <TextView
             android:id="@+id/notaTitulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autoLink="none"
+            android:textColor="@android:color/holo_green_dark"
             android:textStyle="normal" />
 
         <TextView
