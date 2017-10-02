@@ -5,13 +5,20 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 import ifrs.canoas.ifhelper.DefaultActivity;
 import ifrs.canoas.ifhelper.R;
+import ifrs.canoas.lib.BancoHelper;
+import ifrs.canoas.model.portal.Note;
 
 public class ListarNotesActivity extends DefaultActivity {
+    private NoteAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +34,27 @@ public class ListarNotesActivity extends DefaultActivity {
             }
         });
 
+        listNotes(new BancoHelper(getApplicationContext()));
+
     }
+
+    private void listNotes(BancoHelper helper) {
+        ListView notasAdicionadas = (ListView) findViewById(R.id.notasListView);
+
+        if (Note.getAll(helper) != null) {
+            this.adapter =  new NoteAdapter(getApplicationContext(), Note.getAll(helper));
+        }else{
+            this.adapter =  new NoteAdapter(getApplicationContext(), new ArrayList<Note>());
+        }
+        notasAdicionadas.setAdapter(this.adapter);
+
+    }
+
+    protected void onResume(){
+        super.onResume();
+        listNotes(new BancoHelper(getApplicationContext()));
+    }
+
+
 
 }
