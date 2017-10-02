@@ -34,7 +34,7 @@ public class ListarNotesActivity extends DefaultActivity {
             }
         });
 
-        listNotes(new BancoHelper(getApplicationContext()));
+        //listNotes(new BancoHelper(getApplicationContext()));
 
     }
 
@@ -50,6 +50,7 @@ public class ListarNotesActivity extends DefaultActivity {
 
     }
 
+    @Override
     protected void onResume(){
         super.onResume();
         listNotes(new BancoHelper(getApplicationContext()));
