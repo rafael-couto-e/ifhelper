@@ -97,6 +97,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ifrs.canoas.ifhelper.notes.ListarNotesActivity" />
         </activity>
+        <activity
+            android:name=".notes.TakeNotePictureActivity"
+            android:label="@string/title_activity_take_note_picture"
+            android:parentActivityName=".notes.ListarNotesActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ifrs.canoas.ifhelper.notes.ListarNotesActivity" />
+        </activity>
     </application>
 
 </manifest>

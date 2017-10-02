@@ -38,6 +38,11 @@ public class ListarNotesActivity extends DefaultActivity {
 
     }
 
+    //Baseado em https://ptyagicodecamp.github.io/creating-sub-menuitems-for-fab-floating-action-button.html
+    private void floatButtonCardView(){
+
+    }
+
     private void listNotes(BancoHelper helper) {
         ListView notasAdicionadas = (ListView) findViewById(R.id.notasListView);
 
