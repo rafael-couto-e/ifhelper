@@ -21,15 +21,17 @@ public class VerCursoActivity extends DefaultActivity {
         setContentView(R.layout.activity_ver_curso);
         setToolbar();
 
+        //TODO (0.5 - no Semestre individual) Mostrar informações sobre o curso explorar o web service e mostrar algo util
         recuperaPutExtra();
-        configuraFloatButton();
+        listarNotes();
     }
 
     private void recuperaPutExtra(){
         //TODO pegar o id do curso que vem do campo anterior
     }
 
-    private void configuraFloatButton(){
+    private void listarNotes(){
+        //Para saber + sobre o menu button https://material.io/guidelines/components/buttons-floating-action-button.html#
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

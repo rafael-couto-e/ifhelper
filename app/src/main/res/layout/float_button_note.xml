@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/fabTextLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="150dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="24dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="noteText"
+            android:src="@drawable/ic_note_24dp"
+            app:backgroundTint="@color/colorPrimary"
+            app:fabSize="mini" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fabPhotoLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="100dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="24dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabPhotoBT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:onClick="notePhoto"
+            app:backgroundTint="@color/colorPrimary"
+            app:fabSize="mini"
+            app:srcCompat="@mipmap/ic_photo" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutFabSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="16dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:layout_weight="1"
+            app:fabSize="normal"
+            app:srcCompat="@drawable/ic_note_24dp" />
+    </LinearLayout>
+</FrameLayout>

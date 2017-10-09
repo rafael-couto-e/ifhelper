@@ -37,7 +37,7 @@ public abstract class DefaultActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private boolean getMensagens() {
+    protected boolean getMensagens() {
         startActivity(new Intent(getApplicationContext(), ListarMensagemActivity.class));
         return true;
     }

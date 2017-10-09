@@ -29,5 +29,7 @@
     <string name="title_activity_take_shot_note">TakeShotNoteActivity</string>
     <string name="title_activity_take_note_picture">TakeNotePictureActivity</string>
 
+
+    <string name="send_to">Compartilhar por</string>
     <!-- Strings related to login -->
 </resources>

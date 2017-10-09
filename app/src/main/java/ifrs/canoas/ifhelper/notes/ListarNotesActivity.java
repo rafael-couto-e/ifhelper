@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -19,6 +20,10 @@ import ifrs.canoas.model.portal.Note;
 
 public class ListarNotesActivity extends DefaultActivity {
     private NoteAdapter adapter;
+    private boolean fabExpanded = false;
+    private LinearLayout fabText;
+    private LinearLayout fabPhoto;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,21 +31,55 @@ public class ListarNotesActivity extends DefaultActivity {
         setContentView(R.layout.activity_listar_notes);
         setToolbar();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), ManageNoteActivity.class));
-            }
-        });
-
+        trataFloatButton();
+        closeSubMenusFab();
         //listNotes(new BancoHelper(getApplicationContext()));
 
     }
 
-    //Baseado em https://ptyagicodecamp.github.io/creating-sub-menuitems-for-fab-floating-action-button.html
-    private void floatButtonCardView(){
 
+
+    //Baseado em https://github.com/ptyagicodecamp/fab-submenu.git
+    private void trataFloatButton(){
+        fabPhoto = (LinearLayout) findViewById(R.id.fabPhotoLayout);
+        fabText = (LinearLayout) findViewById(R.id.fabTextLayout);
+
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (fabExpanded == true){
+                    closeSubMenusFab();
+                } else {
+                    openSubMenusFab();
+                }
+            }
+        });
+    }
+
+    //closes FAB submenus
+    private void closeSubMenusFab(){
+        fabPhoto.setVisibility(View.INVISIBLE);
+        fabText.setVisibility(View.INVISIBLE);
+        fab.setImageResource(R.drawable.ic_note_24dp);
+        fabExpanded = false;
+    }
+
+    //Opens FAB submenus
+    private void openSubMenusFab(){
+        fabPhoto.setVisibility(View.VISIBLE);
+        fabText.setVisibility(View.VISIBLE);
+        //Change settings icon to 'X' icon
+        fab.setImageResource(R.drawable.ic_close_24dp);
+        fabExpanded = true;
+    }
+
+    public void noteText(View v){
+        startActivity(new Intent(getApplicationContext(), ManageNoteActivity.class));
+    }
+
+    public void notePhoto(View v){
+        startActivity(new Intent(getApplicationContext(), TakeNotePictureActivity.class));
     }
 
     private void listNotes(BancoHelper helper) {

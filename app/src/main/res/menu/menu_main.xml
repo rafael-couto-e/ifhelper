@@ -3,6 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="ifrs.canoas.ifhelper.MainActivity">
     <item
+        android:id="@+id/compartilharBT"
+        android:enabled="false"
+        android:icon="@android:drawable/ic_menu_share"
+        android:orderInCategory="102"
+        android:title="Compartilhar"
+        android:visible="false"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings"
@@ -21,7 +29,7 @@
         android:id="@+id/mensagensMenu"
         android:enabled="true"
         android:icon="@drawable/ic_message_black_24dp"
-        android:orderInCategory="102"
+        android:orderInCategory="103"
         android:title="Mensagens"
         android:visible="true"
         app:showAsAction="always" />
