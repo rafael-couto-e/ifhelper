@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,8 @@ import android.widget.ImageView;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URLDecoder;
 
 import ifrs.canoas.ifhelper.DefaultActivity;
 import ifrs.canoas.ifhelper.R;
@@ -55,17 +58,30 @@ public class TakeNotePictureActivity extends DefaultActivity {
             if(bundle != null){
                 Bitmap img = (Bitmap) bundle.get("data");
 
+
+                saveToInternalStorage(img);
+
                 ImageView iv = (ImageView) findViewById(R.id.verNotaIV);
                 iv.setImageBitmap(img);
             }
         }
     }
 
+    //Ver link https://developer.android.com/training/basics/data-storage/files.html?hl=pt-br
+    private String saveToSD(Bitmap bitmapImage){
+        File sd = Environment.getExternalStorageDirectory();
+        return save(bitmapImage, sd);
+    }
 
     private String saveToInternalStorage(Bitmap bitmapImage){
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
         // para pegar o path de instalação to /data/data/yourapp/app_data/imageDir
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        return save(bitmapImage, directory);
+    }
+
+    private String save(Bitmap bitmapImage, File directory){
+
         // Create imageDir
         //TODO Gerar nome a partir de um inser em banco
         File mypath = new File(directory, "profile.jpg");//Gerar nome a partir
@@ -87,8 +103,12 @@ public class TakeNotePictureActivity extends DefaultActivity {
         return directory.getAbsolutePath();
     }
 
-    private Uri getImage(){
-        return null;
+    private URI getImage(){
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        // para pegar o path de instalação to /data/data/yourapp/app_data/imageDir
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        File file = new File(directory, "profile.jpg");
+        return URI.create(file.getAbsolutePath());
     }
 
     @Override
