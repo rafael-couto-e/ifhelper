@@ -55,9 +55,9 @@ public class WebServiceUtil {
                 e.printStackTrace();
             }
             trustEveryone();
-            HttpsURLConnection conn;
+            HttpURLConnection conn;
 
-            conn = (HttpsURLConnection) url.openConnection();
+            conn = (HttpURLConnection) url.openConnection();
 
             conn.setReadTimeout(10000 /* milliseconds */);
             conn.setConnectTimeout(15000 /* milliseconds */);

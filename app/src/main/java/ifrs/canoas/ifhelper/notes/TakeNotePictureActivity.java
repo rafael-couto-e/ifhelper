@@ -20,7 +20,7 @@ import android.widget.ImageView;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URI;
+
 import java.net.URLDecoder;
 
 import ifrs.canoas.ifhelper.DefaultActivity;
@@ -103,12 +103,13 @@ public class TakeNotePictureActivity extends DefaultActivity {
         return directory.getAbsolutePath();
     }
 
-    private URI getImage(){
+    private Uri getImage(){
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
         // para pegar o path de instalação to /data/data/yourapp/app_data/imageDir
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
         File file = new File(directory, "profile.jpg");
-        return URI.create(file.getAbsolutePath());
+        Log.d("oi", file.getAbsolutePath());
+        return Uri.parse(file.getAbsolutePath());
     }
 
     @Override
@@ -134,7 +135,7 @@ public class TakeNotePictureActivity extends DefaultActivity {
     private void compartilha(){
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
-        shareIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+       // shareIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
         shareIntent.putExtra(Intent.EXTRA_STREAM, getImage());
         shareIntent.setType("image/jpeg");
         startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.send_to)));
