@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
         android:allowBackup="true"
@@ -107,6 +108,26 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ifrs.canoas.ifhelper.notes.ListarNotesActivity" />
         </activity>
+
+        <receiver
+            android:name="ifrs.canoas.lib.ServiceInicialize"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name="ifrs.canoas.lib.NotificationTrigger">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="IFHELPER_NOTIFY" />
+            </intent-filter>
+        </receiver>
+
+
     </application>
 
 </manifest>
