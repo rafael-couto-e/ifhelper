@@ -11,6 +11,7 @@ import ifrs.canoas.ifhelper.geral.LoginActivity;
 import ifrs.canoas.ifhelper.portal.ListarCursoActivity;
 import ifrs.canoas.lib.CONST;
 import ifrs.canoas.lib.SharedPreferenceHelper;
+import ifrs.canoas.lib.WebServiceUtil;
 
 //Selecione a aba de todo e resolva todos eles inclusive esse
 //TODO transformar essa tela no idioma Inglês e Português (caso não tenha feito) 0,5
@@ -26,6 +27,7 @@ public class MainActivity extends DefaultActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setToolbar();//Método que inicia a toolbar
+
     }
 
     /**
@@ -50,7 +52,7 @@ public class MainActivity extends DefaultActivity {
 
 
     /**
-     * Com putEXTRA
+     * Com putEXTRA e SharedPreferences
      *
      * @param v
      */
@@ -65,6 +67,7 @@ public class MainActivity extends DefaultActivity {
             startActivity(intent);
         }
     }
+
 
 
 }
