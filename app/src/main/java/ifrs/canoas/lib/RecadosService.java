@@ -44,7 +44,7 @@ public class RecadosService extends Service {
 				});
 			}};
 
-		timerAtual.schedule(task, 300, 300);
+		timerAtual.schedule(task, 300, 5000);
 
 
 		return(super.onStartCommand(intent, flags, startId));//Continua ciclo de vida do meu serviço

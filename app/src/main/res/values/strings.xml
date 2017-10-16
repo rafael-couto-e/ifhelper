@@ -27,7 +27,7 @@
     <string name="title_activity_ver_curso">VerCursoActivity</string>
     <string name="title_activity_manage_note">Manage Note</string>
     <string name="title_activity_take_shot_note">TakeShotNoteActivity</string>
-    <string name="title_activity_take_note_picture">TakeNotePictureActivity</string>
+    <string name="title_activity_take_note_picture">Anotação por foto</string>
 
 
     <string name="send_to">Compartilhar por</string>
