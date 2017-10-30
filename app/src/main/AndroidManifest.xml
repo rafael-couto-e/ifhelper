@@ -8,9 +8,12 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <!-- Geo -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -117,19 +120,25 @@
             android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <service android:name="ifrs.canoas.lib.RecadosService" />
-
         <receiver android:name="ifrs.canoas.lib.NotificationTrigger">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <action android:name="IFHELPER_NOTIFY" />
             </intent-filter>
         </receiver>
 
+        <service android:name="ifrs.canoas.lib.RecadosService" />
+        <service android:name="ifrs.canoas.lib.GeoLocationService" />
 
+        <activity
+            android:name=".ViewCordinatesActivity"
+            android:label="@string/title_activity_view_cordinates"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

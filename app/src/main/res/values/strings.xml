@@ -31,5 +31,7 @@
 
 
     <string name="send_to">Compartilhar por</string>
+    <string name="title_activity_view_cordinates">ViewCordinatesActivity</string>
+    <string name="title_activity_view_coordinate2">ViewCoordinate2</string>
     <!-- Strings related to login -->
 </resources>

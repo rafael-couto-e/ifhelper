@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import ifrs.canoas.ifhelper.portal.ListarMensagemActivity;
 import ifrs.canoas.lib.NotificationTrigger;
@@ -30,7 +31,7 @@ public abstract class DefaultActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            sendBroadcast(new Intent(getApplicationContext(), NotificationTrigger.class));
+            startActivity(new Intent(getApplicationContext(), ViewCordinatesActivity.class));
             return true;
         }else if(id == R.id.mensagensMenu){
             return getMensagens();

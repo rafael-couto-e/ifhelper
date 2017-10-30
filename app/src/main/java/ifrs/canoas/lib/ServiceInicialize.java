@@ -8,7 +8,7 @@ public class ServiceInicialize extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		intent = new Intent(context, RecadosService.class);//explicita
+		intent = new Intent(context, GeoLocationService.class);//explicita
 		context.startService(intent);
 	}
 	

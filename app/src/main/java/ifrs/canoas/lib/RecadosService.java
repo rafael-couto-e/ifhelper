@@ -38,6 +38,7 @@ public class RecadosService extends Service {
 			public void run() {
 				handler.post(new Runnable() {
 					public void run() {
+
                         Context ct = getApplicationContext();
 						ct.sendBroadcast(new Intent(ct, NotificationTrigger.class));//Explicito
 					}
