@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 import ifrs.canoas.model.FaltaCalculator;
 
 public class CalculaFaltasActivity extends AppCompatActivity {
@@ -18,14 +20,14 @@ public class CalculaFaltasActivity extends AppCompatActivity {
     }
 
     public void calcula(View v) {
-        EditText numCreditosTv = (EditText) findViewById(R.id.numCreditos);
-        EditText faltasTv = (EditText) findViewById(R.id.diasComFalta);
+        EditText numCreditosTv = findViewById(R.id.numCreditos);
+        EditText faltasTv = findViewById(R.id.diasComFalta);
         FaltaCalculator fc = new FaltaCalculator(Integer.parseInt(numCreditosTv.getText().toString()));
         fc.setTotalFaltas(Integer.parseInt(faltasTv.getText().toString()));
 
         Log.d("DEBUG", "Frequencia" + fc.calculaFrequencia());
 
-        TextView resultado = (TextView) findViewById(R.id.resultado);
-        resultado.setText(fc.calculaFrequencia() + "%");
+        TextView resultado = findViewById(R.id.resultado);
+        resultado.setText(String.format(Locale.getDefault(), "%d%%", fc.calculaFrequencia()));
     }
 }

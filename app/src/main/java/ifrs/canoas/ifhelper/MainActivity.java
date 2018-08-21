@@ -10,20 +10,13 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-//Selecione a aba de todo e resolva todos eles inclusive esse
-//TODO transformar essa tela no idioma Inglês e Português
-//TODO adicionar um icone para cada Botão.
-//TODO adicionar métodos para todas as funções da atividade principal
-//TODO Adicionar remoto e submeter a atividade.(ver tutorial da aula).
-
-//Basic activity com floatButton removido
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
 
@@ -45,7 +38,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(objIntent);
     }
 
-    //TODO add Botão calculadora de notas.
+    public void calculaNota(View v){
+        Intent i = new Intent(this, CalculaNotasActivity.class);
+        startActivity(i);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -56,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
+        // Handle acti//TODO Adicionar remoto e submeter a atividade.(ver tutorial da aula).on bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();

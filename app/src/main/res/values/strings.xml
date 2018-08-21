@@ -4,6 +4,23 @@
     <string name="bem_vindo_ao_ifhelper">Bem Vindo ao IFHelper</string>
     <string name="calcula_media_harmonica">Calcula Média Harmonica</string>
     <string name="media">Média</string>
+    <string name="btn_calculadora_faltas">Calculadora de faltas</string>
+    <string name="btn_portal_aluno">Portal do aluno</string>
+    <string name="btn_calendario_academico">Calendário Acadêmico</string>
+    <string name="tv_num_creditos">Numero de créditos</string>
+    <string name="tv_dias_falta">Dias com falta</string>
+    <string name="btn_calcula">Calcula</string>
+    <string name="btn_calcula_notas">Calculadora de Notas</string>
+    <string name="tv_media_prefixo">Sua média é</string>
+    <string name="btn_calcula_media">Calcular Média</string>
+    <string name="btn_adiciona_nota">Adicionar Nota</string>
+    <string name="et_nota_hint">Nota</string>
+    <string name="et_peso_hint">Peso</string>
+    <string name="et_label_hint">Descrição da nota</string>
+    <string name="adicionada">Nota adicionada!</string>
+    <string name="campo_vazio">Preencha todos os campos!</string>
+    <string name="erro_soma_pesos">A soma dos pesos deve ser 10!</string>
+    <string name="erro_qtd_notas">Quantidade de notas insuficientes:</string>
 
     <!-- Strings related to login -->
 </resources>

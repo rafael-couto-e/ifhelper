@@ -31,24 +31,35 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="51dp"
-            android:layout_weight="0"
             android:drawableLeft="@android:drawable/ic_menu_month"
             android:onClick="calculaFaltas"
-            android:text="Calculadora de faltas"
+            android:text="@string/btn_calculadora_faltas"
             tools:ignore="RtlHardcoded" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Portal do aluno"
+            android:text="@string/btn_portal_aluno"
             android:id="@+id/btPortalDoAluno"
-            android:drawableLeft="@drawable/ic_school_red_24dp" />
+            android:onClick="calendarioAcademico"
+            android:drawableLeft="@drawable/ic_school_red_24dp"
+            android:drawableStart="@drawable/ic_school_red_24dp" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Calendário Acadêmico"
-            android:id="@+id/button" />
+            android:text="@string/btn_calendario_academico"
+            android:drawableLeft="@android:drawable/ic_menu_today"
+            android:id="@+id/button"
+            android:drawableStart="@android:drawable/ic_menu_today" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_calcula_notas"
+            android:drawableLeft="@android:drawable/ic_menu_add"
+            android:onClick="calculaNota"
+            android:drawableStart="@android:drawable/ic_menu_add" />
     </LinearLayout>
 
 </RelativeLayout>

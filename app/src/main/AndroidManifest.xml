@@ -26,6 +26,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".CalculaFaltasActivity" />
+        <activity android:name=".CalculaNotasActivity"></activity>
     </application>
 
 </manifest>
