@@ -51,7 +51,7 @@ public class Login extends AppCompatActivity {
         InputStream is = null;
         // Limitar a 500 Caracteres lidos
         int len = 500;
-        Log.d("DEBUG", "url: " + myurl);
+        // Log.d("DEBUG", "url: " + myurl);
 
         try {
             URL url = new URL(myurl);
