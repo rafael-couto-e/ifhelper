@@ -1,9 +1,8 @@
-package com.ifrs.aluno.aula1.model;
+package ifrs.canoas.model;
 
 /**
  * Created by Aluno on 06/06/2017.
  */
-
 public class User {
 
     private String token;

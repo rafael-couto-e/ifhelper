@@ -2,10 +2,6 @@ package ifrs.canoas.model;
 
 import java.util.ArrayList;
 
-/**
- * Created by marcio on 06/08/17.
- */
-
 public class MediaHarmonicaCalculator {
     private ArrayList<ItemMedia> notas = new ArrayList();
 

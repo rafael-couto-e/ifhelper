@@ -43,7 +43,7 @@ public class Login extends AppCompatActivity {
                 "&password=" + senha.getText().toString()  +
                 "&service=moodle_mobile_app";
 
-        DownloadWebpageTask  tarefa = new DownloadWebpageTask();
+        WebServiceConsumer tarefa = new WebServiceConsumer();
         tarefa.execute(uri);
     }
 
@@ -89,7 +89,12 @@ public class Login extends AppCompatActivity {
         return new String(buffer);
     }
 
-    private class DownloadWebpageTask extends AsyncTask<String, Void, String> {
+    /**
+     * 1 - Argumento de entrada para o Async task
+     * 2 -
+     * 3 - Retorno do método doInBackground
+     */                                            //1       2      3
+    private class WebServiceConsumer extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {
             try {
@@ -105,6 +110,7 @@ public class Login extends AppCompatActivity {
             Log.d("teste", result);
             //Gson g = new Gson();
             //User user = g.fromJson(result.trim(), User.class);
+            mensagem.setText(result);
 
         }
     }
