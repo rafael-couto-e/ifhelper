@@ -9,12 +9,16 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import ifrs.canoas.model.User;
 
 public class Login extends AppCompatActivity {
 
@@ -107,15 +111,16 @@ public class Login extends AppCompatActivity {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
-            Log.d("teste", result);
-            //Gson g = new Gson();
-            //User user = g.fromJson(result.trim(), User.class);
-            mensagem.setText(result);
+            if (result.contains("error")) {
+                Log.d("teste", result);
+                mensagem.setText(result);
+                return;
+            }
 
+            Log.d("teste", result);
+            Gson g = new Gson();
+            User user = g.fromJson(result.trim(), User.class);
+            mensagem.setText(user.getToken());
         }
     }
-
-
-
-
 }
