@@ -1,5 +1,6 @@
 package ifrs.canoas.ifhelper;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,12 +12,17 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.Reader;
+import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.CharBuffer;
+import java.util.Scanner;
 
 import ifrs.canoas.model.User;
 
@@ -31,7 +37,7 @@ public class Login extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mensagem = (TextView) findViewById(R.id.message);
+        mensagem = (TextView) findViewById(R.id.tvError);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -41,86 +47,42 @@ public class Login extends AppCompatActivity {
         Log.d("Teste","testando botão");
         EditText usuario =  (EditText) findViewById(R.id.login);
         EditText senha =  (EditText) findViewById(R.id.senha);
+        mensagem.setText(null);
 
         String uri = "http://moodle.canoas.ifrs.edu.br/login/token.php";
         uri += "?username="+ usuario.getText().toString() +
                 "&password=" + senha.getText().toString()  +
                 "&service=moodle_mobile_app";
 
-        WebServiceConsumer tarefa = new WebServiceConsumer();
-        tarefa.execute(uri);
-    }
-
-    private String downloadUrl(String myurl) throws IOException {
-        InputStream is = null;
-        // Limitar a 500 Caracteres lidos
-        int len = 500;
-        // Log.d("DEBUG", "url: " + myurl);
-
-        try {
-            URL url = new URL(myurl);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setReadTimeout(10000 /* milliseconds */);
-            conn.setConnectTimeout(15000 /* milliseconds */);
-            conn.setRequestMethod("GET");
-            conn.setDoInput(true);
-            // Starts the query
-            conn.connect();
-            int response = conn.getResponseCode();
-            Log.d("DEBUG", "Resposta HTTP: " + response);
-
-            is = conn.getInputStream();
-
-            // Convert the InputStream into a string
-            String contentAsString = readIt(is, len);
-            return contentAsString;
-
-            // Makes sure that the InputStream is closed after the app is
-            // finished using it.
-        } finally {
-            if (is != null) {
-                is.close();
+        WebServiceConsumer tarefa = new WebServiceConsumer() {
+            @Override
+            protected String doInBackground(String... urls) {
+                try {
+                    return ConnectionManager.downloadUrl(urls[0]);
+                } catch (IOException e) {
+                    return "Unable to retrieve web page. URL may be invalid." + e;
+                }
             }
-        }
 
-    }
+            // onPostExecute displays the results of the AsyncTask.
+            @Override
+            protected void onPostExecute(String result) {
+                if (result.contains("error")) {
+                    mensagem.setText(new Gson().fromJson(result, Response.class).getError());
+                    return;
+                }
 
-    public String readIt(InputStream stream, int len) throws IOException {
-        Reader reader = null;
-        reader = new InputStreamReader(stream, "UTF-8");
-        char[] buffer = new char[len];
-        reader.read(buffer);
-        return new String(buffer);
-    }
-
-    /**
-     * 1 - Argumento de entrada para o Async task
-     * 2 -
-     * 3 - Retorno do método doInBackground
-     */                                            //1       2      3
-    private class WebServiceConsumer extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... urls) {
-            try {
-                return downloadUrl(urls[0]);
-            } catch (IOException e) {
-                return "Unable to retrieve web page. URL may be invalid." + e;
-            }
-        }
-
-        // onPostExecute displays the results of the AsyncTask.
-        @Override
-        protected void onPostExecute(String result) {
-            if (result.contains("error")) {
+                Response<User> response = new Response<>();
                 Log.d("teste", result);
-                mensagem.setText(result);
-                return;
-            }
+                Gson g = new Gson();
+                User user = g.fromJson(result.trim(), User.class);
+                response.setData(user);
 
-            Log.d("teste", result);
-            Gson g = new Gson();
-            User user = g.fromJson(result.trim(), User.class);
-            mensagem.setText(user.getToken());
-        }
+                Intent i = new Intent(Login.this, HomeActivity.class);
+                i.putExtra("token", response.getData().getToken());
+                startActivity(i);
+            }
+        };
+        tarefa.execute(uri);
     }
 }
