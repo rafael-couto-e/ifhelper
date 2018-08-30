@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -91,6 +92,17 @@ public class HomeActivity extends AppCompatActivity {
         List<Course> courses = new Gson().fromJson(json, listType);
 
         response.getData().setCourses(courses);
-        System.out.println(json);
+
+        displayCourses();
+    }
+
+    private void displayCourses() {
+        LinearLayout llCourses = (LinearLayout) findViewById(R.id.llCourses);
+
+        for(Course course: response.getData().getCourses()) {
+            TextView tv = new TextView(this);
+            tv.setText(course.getFullname());
+            llCourses.addView(tv);
+        }
     }
 }
