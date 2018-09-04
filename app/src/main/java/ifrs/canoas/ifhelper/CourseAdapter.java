@@ -12,14 +12,17 @@ import java.util.List;
 import ifrs.canoas.model.Course;
 
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseViewHolder> {
-    private Context context;
     private List<Course> courses;
     private LayoutInflater inflater;
+    private OnItemClickListener listener;
 
     public CourseAdapter(Context context, List<Course> courses) {
-        this.context = context;
         this.courses = courses;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 
     @Override
@@ -64,6 +67,9 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         public void loadData(Course course) {
             tvId.setText(course.getId());
             tvName.setText(course.getFullname());
+
+            if (listener != null)
+                this.itemView.setOnClickListener(v -> listener.onItemClick(course));
         }
     }
 }

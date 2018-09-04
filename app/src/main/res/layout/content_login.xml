@@ -37,6 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:text="02080146"
             android:inputType="number"
             tools:layout_editor_absoluteX="55dp"
             tools:layout_editor_absoluteY="98dp" />

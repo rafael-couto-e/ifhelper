@@ -38,6 +38,7 @@ public class Login extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         mensagem = (TextView) findViewById(R.id.tvError);
+        findViewById(R.id.senha).requestFocus();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }

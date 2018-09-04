@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -18,7 +19,7 @@ import java.util.Locale;
 import ifrs.canoas.model.Course;
 import ifrs.canoas.model.Courses;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements OnItemClickListener {
     private Response<Courses> response = new Response<>();
 
     @Override
@@ -27,6 +28,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         String token = getIntent().getStringExtra("token");
 
@@ -92,7 +94,13 @@ public class HomeActivity extends AppCompatActivity {
         rvCourses.setItemAnimator(new DefaultItemAnimator());
 
         CourseAdapter adapter = new CourseAdapter(this, response.getData().getCourses());
+        adapter.setOnItemClickListener(this);
 
         rvCourses.setAdapter(adapter);
+    }
+
+    @Override
+    public void onItemClick(Course c) {
+        Toast.makeText(this, c.getFullname(), Toast.LENGTH_SHORT).show();
     }
 }
