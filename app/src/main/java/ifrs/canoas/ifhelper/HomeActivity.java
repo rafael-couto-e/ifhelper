@@ -1,5 +1,6 @@
 package ifrs.canoas.ifhelper;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -22,6 +23,7 @@ import ifrs.canoas.model.Courses;
 
 public class HomeActivity extends AppCompatActivity implements OnItemClickListener {
     private Response<Courses> response = new Response<>();
+    private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,9 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
     }
 
     private void loadUserData(final String token) {
+        dialog = ProgressDialog.show(this, "Home", "Carregando...");
+        dialog.setCancelable(false);
+
         String uri = "http://moodle.canoas.ifrs.edu.br/webservice/rest/server.php";
         uri += "?wstoken="+token;
         uri += "&wsfunction=core_webservice_get_site_info";
@@ -70,23 +75,40 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
 
     private void setupWelcomeMessage(String token, String json) {
         if(json.contains("invalidtoken")) {
+            Toast.makeText(
+                    this,
+                    "A sessão expirou, efetue login.",
+                    Toast.LENGTH_SHORT
+            ).show();
+
             this.onBackPressed();
             return;
         }
 
         TextView tvWelcome = (TextView) findViewById(R.id.tvWelcome);
 
-        response.setData(new Gson().fromJson(json, Courses.class));
+        Courses courses = new Courses();
 
-        tvWelcome.setText(
-                String.format(
-                        Locale.getDefault(),
-                        "Bem-vindo, %s!",
-                        response.getData().getFirstname()
-                )
-        );
+        try {
+            response.setData(new Gson().fromJson(json, Courses.class));
 
-        loadCourses(token, String.valueOf(response.getData().getUserId()));
+            tvWelcome.setText(
+                    String.format(
+                            Locale.getDefault(),
+                            "Bem-vindo, %s!",
+                            response.getData().getFirstname()
+                    )
+            );
+
+            loadCourses(token, String.valueOf(response.getData().getUserId()));
+        }catch (Exception e) {
+            dialog.dismiss();
+            Toast.makeText(
+                    this,
+                    "Ocorreu algum problema, tente novamente.",
+                    Toast.LENGTH_SHORT
+            ).show();
+        }
     }
 
     private void loadCourses(String token, String userId) {
@@ -104,11 +126,20 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
     public void setupList(String json) {
         Type listType = new TypeToken<List<Course>>(){}.getType();
 
-        List<Course> courses = new Gson().fromJson(json, listType);
+        try {
+            List<Course> courses = new Gson().fromJson(json, listType);
 
-        response.getData().setCourses(courses);
+            response.getData().setCourses(courses);
 
-        displayCourses();
+            displayCourses();
+        } catch (Exception e) {
+            Toast.makeText(
+                    this,
+                    "Ocorreu algum problema, tente novamente.",
+                    Toast.LENGTH_SHORT
+            ).show();
+            dialog.dismiss();
+        }
     }
 
     private void displayCourses() {
@@ -120,6 +151,8 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
         adapter.setOnItemClickListener(this);
 
         rvCourses.setAdapter(adapter);
+
+        dialog.dismiss();
     }
 
     @Override
