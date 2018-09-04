@@ -9,12 +9,17 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import ifrs.canoas.lib.WebServiceUtil;
+import ifrs.canoas.model.User;
 
 public class Login extends AppCompatActivity {
 
@@ -47,48 +52,6 @@ public class Login extends AppCompatActivity {
         tarefa.execute(uri);
     }
 
-    private String downloadUrl(String myurl) throws IOException {
-        InputStream is = null;
-        // Limitar a 500 Caracteres lidos
-        int len = 500;
-        // Log.d("DEBUG", "url: " + myurl);
-
-        try {
-            URL url = new URL(myurl);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setReadTimeout(10000 /* milliseconds */);
-            conn.setConnectTimeout(15000 /* milliseconds */);
-            conn.setRequestMethod("GET");
-            conn.setDoInput(true);
-            // Starts the query
-            conn.connect();
-            int response = conn.getResponseCode();
-            Log.d("DEBUG", "Resposta HTTP: " + response);
-
-            is = conn.getInputStream();
-
-            // Convert the InputStream into a string
-            String contentAsString = readIt(is, len);
-            return contentAsString;
-
-            // Makes sure that the InputStream is closed after the app is
-            // finished using it.
-        } finally {
-            if (is != null) {
-                is.close();
-            }
-        }
-
-    }
-
-    public String readIt(InputStream stream, int len) throws IOException {
-        Reader reader = null;
-        reader = new InputStreamReader(stream, "UTF-8");
-        char[] buffer = new char[len];
-        reader.read(buffer);
-        return new String(buffer);
-    }
-
     /**
      * 1 - Argumento de entrada para o Async task
      * 2 -
@@ -98,7 +61,7 @@ public class Login extends AppCompatActivity {
         @Override
         protected String doInBackground(String... urls) {
             try {
-                return downloadUrl(urls[0]);
+                return WebServiceUtil.getContentAsString(urls[0]);
             } catch (IOException e) {
                 return "Unable to retrieve web page. URL may be invalid." + e;
             }
@@ -108,8 +71,9 @@ public class Login extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             Log.d("teste", result);
-            //Gson g = new Gson();
-            //User user = g.fromJson(result.trim(), User.class);
+            Gson g = new Gson();
+            User user = g.fromJson(result.trim(), User.class);
+            Log.d("oi", user.toString());
             mensagem.setText(result);
 
         }
