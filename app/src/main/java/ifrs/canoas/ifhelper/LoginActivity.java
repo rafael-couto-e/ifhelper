@@ -1,5 +1,6 @@
 package ifrs.canoas.ifhelper;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,14 +11,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
 
 import ifrs.canoas.lib.WebServiceUtil;
-import ifrs.canoas.model.Curso;
 import ifrs.canoas.model.Token;
 import ifrs.canoas.model.User;
 
@@ -87,30 +85,16 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             System.out.println("OBAAAAA");
             mensagem.setText(result);
-            WebServiceCourses web = new WebServiceCourses();
-            web.execute("http://moodle.canoas.ifrs.edu.br/webservice/rest/server.php?wstoken=" + user.getToken() + "&wsfunction=core_enrol_get_users_courses&moodlewsrestformat=json&userid="+ user.getUserid());
+
+            Intent intent  = new Intent(getApplicationContext(), ListarDisciplinasActivity.class);
+
+            intent.putExtra("usuario",  user);
+
+            startActivity(intent);
         }
     }
 
 
-    private class WebServiceCourses extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... urls) {
-            try {
-                return WebServiceUtil.getContentAsString(urls[0]);
-            } catch (IOException e) {
-                return "Unable to retrieve web page. URL may be invalid." + e;
-            }
-        }
 
-        // onPostExecute displays the results of the AsyncTask.
-        @Override
-        protected void onPostExecute(String result) {
-            Gson g = new Gson();
-            ArrayList<Curso> listaCursos = g.fromJson(result.trim(), new TypeToken<List<Curso>>(){}.getType());
-            Log.d("oi", listaCursos.toString());
-            mensagem.setText(" Logado com sucesso" );
-        }
-    }
 
 }

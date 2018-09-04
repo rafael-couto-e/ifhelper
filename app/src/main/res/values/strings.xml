@@ -21,6 +21,7 @@
     </string>
     <string name="title_activity_login2">Sign in</string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_listar_disciplinas">Minhas Disciplinas</string>
 
     <!-- Strings related to login -->
 </resources>

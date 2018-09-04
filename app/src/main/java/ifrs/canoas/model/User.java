@@ -1,6 +1,8 @@
 package ifrs.canoas.model;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable{
     private int userid;
     private String username;
     private String fullname;
