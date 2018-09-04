@@ -35,14 +35,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ifrs.canoas.ifhelper.MainActivity" />
         </activity>
-        <activity
-            android:name=".LoginNativo"
-            android:label="@string/title_activity_login_nativo"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="ifrs.canoas.ifhelper.MainActivity" />
-        </activity>
     </application>
 
 </manifest>
