@@ -6,6 +6,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,11 +31,28 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        String token = getIntent().getStringExtra("token");
+        String token = Session.init(this).getToken();
 
-        if (token == null) return;
+        if (token == null) onBackPressed();
 
         loadUserData(token);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Session.init(this).clear();
+        super.onBackPressed();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.onBackPressed();
+                return true;
+        }
+
+        return false;
     }
 
     private void loadUserData(final String token) {
@@ -51,6 +69,11 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
     }
 
     private void setupWelcomeMessage(String token, String json) {
+        if(json.contains("invalidtoken")) {
+            this.onBackPressed();
+            return;
+        }
+
         TextView tvWelcome = (TextView) findViewById(R.id.tvWelcome);
 
         response.setData(new Gson().fromJson(json, Courses.class));

@@ -37,6 +37,13 @@ public class Login extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        String token = Session.init(this).getToken();
+
+        if (token != null) {
+            goToHome();
+            return;
+        }
+
         mensagem = (TextView) findViewById(R.id.tvError);
         findViewById(R.id.senha).requestFocus();
 
@@ -67,10 +74,15 @@ public class Login extends AppCompatActivity {
             User user = g.fromJson(result.trim(), User.class);
             response.setData(user);
 
-            Intent i = new Intent(Login.this, HomeActivity.class);
-            i.putExtra("token", response.getData().getToken());
-            startActivity(i);
+            Session.init(this).saveToken(response.getData().getToken());
+
+            goToHome();
         });
         tarefa.execute(uri);
+    }
+
+    private void goToHome() {
+        Intent i = new Intent(Login.this, HomeActivity.class);
+        startActivity(i);
     }
 }
