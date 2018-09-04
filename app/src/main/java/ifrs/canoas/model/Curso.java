@@ -19,4 +19,12 @@ public class Curso {
     public void setShortname(String shortname) {
         this.shortname = shortname;
     }
+
+    @Override
+    public String toString() {
+        return "Curso{" +
+                "id=" + id +
+                ", shortname='" + shortname + '\'' +
+                '}';
+    }
 }

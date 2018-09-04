@@ -71,6 +71,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void loginMoodle(View v){
 
-        startActivity(new Intent(this, Login.class));
+        startActivity(new Intent(this, LoginActivity.class));
     }
 }

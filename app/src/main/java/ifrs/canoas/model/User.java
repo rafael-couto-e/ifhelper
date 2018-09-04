@@ -1,12 +1,10 @@
 package ifrs.canoas.model;
 
-/**
- * Created by Aluno on 06/06/2017.
- */
 public class User {
-
+    private int userid;
+    private String username;
+    private String fullname;
     private String token;
-    private String error;
 
     public String getToken() {
         return token;
@@ -16,19 +14,38 @@ public class User {
         this.token = token;
     }
 
-    public String getError() {
-        return error;
+    public void setUserid(int userId){
+        this.userid = userId;
     }
 
-    public void setError(String error) {
-        this.error = error;
+    public int getUserid() {
+        return userid;
+    }
+
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
     @Override
     public String toString() {
-        return "User{" +
-                "token='" + token + '\'' +
-                ", error='" + error + '\'' +
+        return "UsuarioCompleto{" +
+                "userId=" + userid +
+                ", username='" + username + '\'' +
+                ", fullname='" + fullname + '\'' +
                 '}';
     }
 }
