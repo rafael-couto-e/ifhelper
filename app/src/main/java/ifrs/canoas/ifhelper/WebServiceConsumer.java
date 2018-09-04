@@ -4,7 +4,13 @@ import android.os.AsyncTask;
 
 import java.io.IOException;
 
-public abstract class WebServiceConsumer extends AsyncTask<String, Void, String> {
+public class WebServiceConsumer extends AsyncTask<String, Void, String> {
+    private ExecutionListener listener;
+
+    public WebServiceConsumer(ExecutionListener listener) {
+        this.listener = listener;
+    }
+
     @Override
     protected String doInBackground(String... strings) {
         try{
@@ -15,5 +21,7 @@ public abstract class WebServiceConsumer extends AsyncTask<String, Void, String>
     }
 
     @Override
-    protected abstract void onPostExecute(String s);
+    protected void onPostExecute(String s) {
+        listener.onPostExecute(s);
+    }
 }

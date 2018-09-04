@@ -1,18 +1,16 @@
 package ifrs.canoas.ifhelper;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Locale;
@@ -43,12 +41,9 @@ public class HomeActivity extends AppCompatActivity {
         uri += "&wsfunction=core_webservice_get_site_info";
         uri += "&moodlewsrestformat=json";
 
-        WebServiceConsumer consumer = new WebServiceConsumer() {
-            @Override
-            protected void onPostExecute(String s) {
-                setupWelcomeMessage(token, s);
-            }
-        };
+        WebServiceConsumer consumer = new WebServiceConsumer(
+            s -> setupWelcomeMessage(token, s)
+        );
 
         consumer.execute(uri);
     }
@@ -76,12 +71,7 @@ public class HomeActivity extends AppCompatActivity {
         uri += "&moodlewsrestformat=json";
         uri += "&userid="+userId;
 
-        WebServiceConsumer consumer = new WebServiceConsumer() {
-            @Override
-            protected void onPostExecute(String s) {
-                setupList(s);
-            }
-        };
+        WebServiceConsumer consumer = new WebServiceConsumer(this::setupList);
 
         consumer.execute(uri);
     }
@@ -97,12 +87,12 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void displayCourses() {
-        LinearLayout llCourses = (LinearLayout) findViewById(R.id.llCourses);
+        RecyclerView rvCourses = (RecyclerView) findViewById(R.id.rvCourses);
+        rvCourses.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        rvCourses.setItemAnimator(new DefaultItemAnimator());
 
-        for(Course course: response.getData().getCourses()) {
-            TextView tv = new TextView(this);
-            tv.setText(course.getFullname());
-            llCourses.addView(tv);
-        }
+        CourseAdapter adapter = new CourseAdapter(this, response.getData().getCourses());
+
+        rvCourses.setAdapter(adapter);
     }
 }

@@ -3,7 +3,7 @@ package ifrs.canoas.model;
 import java.util.ArrayList;
 
 public class MediaHarmonicaCalculator {
-    private ArrayList<ItemMedia> notas = new ArrayList();
+    private ArrayList<ItemMedia> notas = new ArrayList<>();
 
     public void addNota(String label, double peso, double media){
         //TODO adicionar no arrayList

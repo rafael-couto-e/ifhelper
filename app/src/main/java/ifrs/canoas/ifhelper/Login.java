@@ -54,35 +54,22 @@ public class Login extends AppCompatActivity {
                 "&password=" + senha.getText().toString()  +
                 "&service=moodle_mobile_app";
 
-        WebServiceConsumer tarefa = new WebServiceConsumer() {
-            @Override
-            protected String doInBackground(String... urls) {
-                try {
-                    return ConnectionManager.downloadUrl(urls[0]);
-                } catch (IOException e) {
-                    return "Unable to retrieve web page. URL may be invalid." + e;
-                }
+        WebServiceConsumer tarefa = new WebServiceConsumer(result -> {
+            if (result.contains("error")) {
+                mensagem.setText(new Gson().fromJson(result, Response.class).getError());
+                return;
             }
 
-            // onPostExecute displays the results of the AsyncTask.
-            @Override
-            protected void onPostExecute(String result) {
-                if (result.contains("error")) {
-                    mensagem.setText(new Gson().fromJson(result, Response.class).getError());
-                    return;
-                }
+            Response<User> response = new Response<>();
+            Log.d("teste", result);
+            Gson g = new Gson();
+            User user = g.fromJson(result.trim(), User.class);
+            response.setData(user);
 
-                Response<User> response = new Response<>();
-                Log.d("teste", result);
-                Gson g = new Gson();
-                User user = g.fromJson(result.trim(), User.class);
-                response.setData(user);
-
-                Intent i = new Intent(Login.this, HomeActivity.class);
-                i.putExtra("token", response.getData().getToken());
-                startActivity(i);
-            }
-        };
+            Intent i = new Intent(Login.this, HomeActivity.class);
+            i.putExtra("token", response.getData().getToken());
+            startActivity(i);
+        });
         tarefa.execute(uri);
     }
 }
