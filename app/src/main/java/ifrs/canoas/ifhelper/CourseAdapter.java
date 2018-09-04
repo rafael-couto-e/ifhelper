@@ -62,14 +62,15 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         public void loadComponents() {
             tvId = (TextView) itemView.findViewById(R.id.tvId);
             tvName = (TextView) itemView.findViewById(R.id.tvName);
+
+            if (listener != null)
+                this.itemView.setOnClickListener(v -> listener.onItemClick((Course) itemView.getTag()));
         }
 
         public void loadData(Course course) {
             tvId.setText(course.getId());
             tvName.setText(course.getFullname());
-
-            if (listener != null)
-                this.itemView.setOnClickListener(v -> listener.onItemClick(course));
+            itemView.setTag(course);
         }
     }
 }
