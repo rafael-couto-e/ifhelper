@@ -73,7 +73,8 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
                         elements.addAll(original);
                     else
                         for (Course c : original)
-                            if (c.getFullname().toLowerCase().contains(query.toLowerCase()))
+                            if (c.getFullname().toLowerCase().contains(query.toLowerCase()) ||
+                                    c.getId().toLowerCase().contains(query.toLowerCase()))
                                 elements.add(c);
 
                     results.values = elements;
