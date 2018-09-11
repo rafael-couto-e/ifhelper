@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -20,8 +19,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ifrs.canoas.lib.ListaDisciplinaAdapter;
 import ifrs.canoas.lib.WebServiceUtil;
-import ifrs.canoas.model.Curso;
+import ifrs.canoas.model.Disciplina;
 import ifrs.canoas.model.User;
 
 public class ListarDisciplinasActivity extends AppCompatActivity {
@@ -83,10 +83,12 @@ public class ListarDisciplinasActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             Gson g = new Gson();
-            ArrayList<Curso> listaCursos = g.fromJson(result.trim(), new TypeToken<List<Curso>>(){}.getType());
-            Log.d("oi", listaCursos.toString());
-            //mensagem.setText(" Logado com sucesso" );
-            list.setAdapter(new ArrayAdapter<Curso>(getApplicationContext(), android.R.layout.simple_list_item_1, listaCursos));
+            ArrayList<Disciplina> lista = g.fromJson(result.trim(), new TypeToken<List<Disciplina>>(){}.getType());
+
+            //list.setAdapter(new ArrayAdapter<Disciplina>(getApplicationContext(), android.R.layout.simple_list_item_1, listaCursos));
+
+            ListaDisciplinaAdapter ld = new ListaDisciplinaAdapter(lista, getApplicationContext());
+            list.setAdapter(ld);
         }
     }
 

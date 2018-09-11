@@ -1,6 +1,6 @@
 package ifrs.canoas.model;
 
-public class Curso {
+public class Disciplina {
     private int id;
     private String shortname;
 

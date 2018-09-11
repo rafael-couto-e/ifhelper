@@ -5,7 +5,7 @@ package ifrs.canoas.model;
  */
 public class Token {
 
-    private String token;
+    private String token ="";
     private String error;
 
     public String getToken() {
