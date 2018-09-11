@@ -7,7 +7,9 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -87,8 +89,6 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
 
         TextView tvWelcome = (TextView) findViewById(R.id.tvWelcome);
 
-        Courses courses = new Courses();
-
         try {
             response.setData(new Gson().fromJson(json, Courses.class));
 
@@ -151,6 +151,27 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
         adapter.setOnItemClickListener(this);
 
         rvCourses.setAdapter(adapter);
+
+        SearchView searchView = (SearchView) findViewById(R.id.svCourses);
+
+        searchView.setOnCloseListener(() -> {
+            adapter.getFilter().filter("");
+            return false;
+        });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                rvCourses.requestFocus();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
 
         dialog.dismiss();
     }

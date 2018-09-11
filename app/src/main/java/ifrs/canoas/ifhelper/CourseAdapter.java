@@ -5,19 +5,25 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ifrs.canoas.model.Course;
 
-public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseViewHolder> {
+public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseViewHolder> implements Filterable {
     private List<Course> courses;
+    private List<Course> original;
     private LayoutInflater inflater;
     private OnItemClickListener listener;
+    private Filter filter;
 
     public CourseAdapter(Context context, List<Course> courses) {
         this.courses = courses;
+        this.original = new ArrayList<>(courses);
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -49,6 +55,46 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     @Override
     public int getItemViewType(int position) {
         return R.layout.course_row;
+    }
+
+    @Override
+    public Filter getFilter() {
+        if (filter == null) {
+            filter = new Filter() {
+                @Override
+                protected FilterResults performFiltering(CharSequence constraint) {
+                    List<Course> elements = new ArrayList<>();
+
+                    String query = constraint.toString();
+
+                    FilterResults results = new FilterResults();
+
+                    if (query.isEmpty())
+                        elements.addAll(original);
+                    else
+                        for (Course c : original)
+                            if (c.getFullname().toLowerCase().contains(query.toLowerCase()))
+                                elements.add(c);
+
+                    results.values = elements;
+
+                    return results;
+                }
+
+                @Override
+                protected void publishResults(CharSequence constraint, FilterResults results) {
+                    courses.clear();
+
+                    List<Course> filtered = (List<Course>) results.values;
+
+                    courses.addAll(filtered);
+
+                    notifyDataSetChanged();
+                }
+            };
+        }
+
+        return filter;
     }
 
     class CourseViewHolder extends RecyclerView.ViewHolder {
