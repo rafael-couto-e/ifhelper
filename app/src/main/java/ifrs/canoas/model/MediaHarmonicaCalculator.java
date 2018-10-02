@@ -10,13 +10,10 @@ public class MediaHarmonicaCalculator {
     private ArrayList<ItemMedia> notas = new ArrayList();
 
     public void addNota(String label, double peso, double media){
-        //TODO adicionar no arrayList
+
     }
 
     /**
-     * TODO verificar médias >0 ou 0,0001
-     * TODO verificar se a soma dos pesos é igual a 10
-     * TODO calcular
      *
      * @return
      * @throws Exception
