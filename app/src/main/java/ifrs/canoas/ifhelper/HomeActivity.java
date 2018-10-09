@@ -1,6 +1,7 @@
 package ifrs.canoas.ifhelper;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -180,6 +181,9 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
 
     @Override
     public void onItemClick(Course c) {
-        Toast.makeText(this, c.getFullname(), Toast.LENGTH_SHORT).show();
+        startActivity(
+                new Intent(this, NotesActivity.class)
+                        .putExtra("course", c)
+        );
     }
 }
